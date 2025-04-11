@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <title>Cyborg - Awesome HTML5 Template</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <!-- CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/fontawesome.css" />
+  <link rel="stylesheet" href="assets/css/templatemo-cyborg-gaming.css" />
+  <link rel="stylesheet" href="assets/css/owl.css" />
+  <link rel="stylesheet" href="assets/css/animate.css" />
+  <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" />
+</head>
+
+<body>
+
+  <!-- Preloader -->
+  
+
+  <!-- Header -->
+  <header class="header-area header-sticky">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <nav class="main-nav">
+            <a href="index.html" class="logo" style="display: flex; align-items: center; text-decoration: none;">
+              <img src="assets/images/logo.png" alt="" style="width: 60px; height: 60px; border-radius: 50%;" />
+              <label style="margin-left: 10px; font-size: 16px; color: black;">Julio Cesar Orduño Lopez</label>
+            </a>
+            <ul class="nav">
+              <li><a style="color: black;" href="index.html" >Tutoriales</a></li>
+              <li><a style="color: black;" href="browse.html">Busqueda tutoriales</a></li>
+              <li><a style="color: black;" href="details.html">Detailes MVC</a></li>
+              <li><a style="color: black;" href="details.html">Detailes MVC</a></li>
+  
+             
+              </ul>    
+      
+          </nav>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Contenido principal -->
+  <div class="container mt-5">
+    <div class="page-content">
+      <div class="heading-section mb-3">
+        <h4><em>Listado de</em> Tutoriales</h4>
+      </div>
+      <table id="tutorialesTable" class="table table-striped table-bordered">
+        <thead>
+          <tr>
+            <th>Título</th>
+            <th>Categoría</th>
+            <th>Calificación</th>
+            <th>Descargas</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+
+      <hr />
+      <div class="row mt-4">
+        <div class="col-md-3"><input type="text" id="titulo" class="form-control" placeholder="Título" /></div>
+        <div class="col-md-3"><input type="text" id="categoria" class="form-control" placeholder="Categoría" /></div>
+        <div class="col-md-2"><input type="number" id="calificacion" class="form-control" placeholder="★" /></div>
+        <div class="col-md-2"><input type="text" id="descargas" class="form-control" placeholder="Descargas" /></div>
+        <div class="col-md-2"><button id="agregar" class="btn btn-success w-100">Agregar</button></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="mt-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <p>
+            Copyright © 2036 <a href="#">Cyborg Gaming</a> Company. All rights reserved.
+            <br />Design: <a href="https://templatemo.com" target="_blank" title="free CSS templates">TemplateMo</a> Distributed By
+            <a href="https://themewagon.com" target="_blank">ThemeWagon</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+  <script>
+ $(document).ready(function() {
+    $('#tutorialesTable').DataTable();
+});
+
+  // Cuando se carga el documento
+  $(document).ready(function() {
+    // Función para cargar los tutoriales en la tabla
+    function cargarTutoriales() {
+      $.ajax({
+        url: 'http://localhost:8044/tutoriales',
+        method: 'GET',
+        success: function(data) {
+          let tablaBody = $('#tutorialesTable tbody');
+          tablaBody.empty();
+          data.forEach((tutorial, index) => {
+            let fila = `<tr>
+                          <td>${tutorial.titulo}</td>
+                          <td>${tutorial.categoria}</td>
+                          <td>${tutorial.calificacion}</td>
+                          <td>${tutorial.descargas}</td>
+                          <td>
+                            <button class="btn btn-danger eliminar" data-id="${index}">Eliminar</button>
+                          </td>
+                        </tr>`;
+            tablaBody.append(fila);
+          });
+        },
+        error: function(xhr, status, error) {
+          alert('Error al obtener los tutoriales: ' + error);
+        }
+      });
+    }
+
+    // Cargar los tutoriales al iniciar la página
+    cargarTutoriales();
+
+    // Agregar un nuevo tutorial
+    $('#agregar').click(function() {
+      const nuevoTutorial = {
+        titulo: $('#titulo').val(),
+        categoria: $('#categoria').val(),
+        calificacion: $('#calificacion').val(),
+        descargas: $('#descargas').val()
+      };
+
+      $.ajax({
+        url: 'http://localhost:8044/tutoriales',
+        method: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify(nuevoTutorial),
+        success: function(response) {
+          alert(response.mensaje);
+          cargarTutoriales(); // Volver a cargar los tutoriales
+        },
+        error: function(xhr, status, error) {
+          alert('Error al agregar el tutorial: ' + error);
+        }
+      });
+    });
+$(document).on('click', '.eliminar', function() {
+  const index = $(this).data('id');
+
+  
+  const confirmacion = confirm('¿Estás seguro de eliminar este tutorial?');
+  if (confirmacion) {
+    // Eliminar el tutorial por el índice
+    $.ajax({
+      url: `http://localhost:8044/tutoriales/${index}`,
+      method: 'DELETE',
+      success: function(response) {
+        alert(response.mensaje);
+        cargarTutoriales();
+      },
+      error: function(xhr, status, error) {
+        alert('Error al eliminar el tutorial: ' + error);
+      }
+    });
+  }
+});
+
+  
+  });
+
+
+
+               
+</script>  
+</body>
+</html>

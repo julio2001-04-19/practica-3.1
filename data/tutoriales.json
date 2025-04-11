@@ -1,0 +1,38 @@
+[
+  {
+    "titulo": "CS-GO",
+    "categoria": "Legendary",
+    "calificacion": 4.9,
+    "descargas": "2.2M"
+  },
+  {
+    "titulo": "PugG",
+    "categoria": "Battle Royale",
+    "calificacion": 4.9,
+    "descargas": "2.2M"
+  },
+  {
+    "titulo": "Unity",
+    "categoria": "Game Engine",
+    "calificacion": 4.8,
+    "descargas": "1.1M"
+  },
+  {
+    "titulo": "Node.js",
+    "categoria": "Backend",
+    "calificacion": 4.7,
+    "descargas": "1.8M"
+  },
+  {
+    "titulo": "Python",
+    "categoria": "Programming",
+    "calificacion": 4.9,
+    "descargas": "3.4M"
+  },
+  {
+    "titulo": "Android Studio",
+    "categoria": "Mobile",
+    "calificacion": 4.6,
+    "descargas": "900K"
+  }
+]
