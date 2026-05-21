@@ -107,7 +107,7 @@
     // Función para cargar los tutoriales en la tabla
     function cargarTutoriales() {
       $.ajax({
-        url: 'http://localhost:8044/tutoriales',
+        url: 'https://practica-3-1-j4qp.onrender.com',
         method: 'GET',
         success: function(data) {
           let tablaBody = $('#tutorialesTable tbody');
@@ -144,7 +144,7 @@
       };
 
       $.ajax({
-        url: 'http://localhost:8044/tutoriales',
+        url: 'https://practica-3-1-j4qp.onrender.com',
         method: 'POST',
         contentType: 'application/json',
         data: JSON.stringify(nuevoTutorial),
@@ -165,7 +165,7 @@ $(document).on('click', '.eliminar', function() {
   if (confirmacion) {
     // Eliminar el tutorial por el índice
     $.ajax({
-      url: `http://localhost:8044/tutoriales/${index}`,
+      url: `https://practica-3-1-j4qp.onrender.com${index}`,
       method: 'DELETE',
       success: function(response) {
         alert(response.mensaje);
