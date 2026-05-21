@@ -123,14 +123,15 @@ Global Styles
 */
 html,
 body {
-  background-color: #189bdd;
+    background: #f5f7fb;
+  color: #1f2937;
 
   font-family: 'Poppins', sans-serif;
 }
 
 body .page-content {
   margin-top: 110px;
-  background:#2191a1;
+   background: #ffffff;
   padding: 60px;
   border-radius: 23px;
 }
@@ -809,12 +810,12 @@ Most Popular Style
 .most-popular {
   margin-top: 60px;
   padding: 30px;
-  background-color: #77dce8;
+  background-color: #138838;
   border-radius: 23px;
 }
 
 .most-popular .item {
-  background-color: #77dce8;
+  background-color: #0fe6bb;
   padding: 30px 15px;
   border-radius: 23px;
   margin-bottom: 30px;
@@ -1312,11 +1313,11 @@ Game Details Style
 .game-details .content {
   border-radius: 23px;
   padding: 30px;
-  background-color: #319bd0;
+  background-color: #697981;
 }
 
 .game-details .content .left-info {
-  background-color: #3f97c3;
+  background-color: #949c9f;
   border-radius: 23px;
   padding: 30px;
   margin-bottom: 30px;
